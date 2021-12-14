@@ -1,6 +1,6 @@
-# 거스름 돈 문제
+# Q1. 거스름 돈 문제
 
-def solution(input_value):
+def solution_Q1(input_value):
     remains = input_value
     coin_count = 0
 
@@ -12,9 +12,9 @@ def solution(input_value):
 
 
 
-# 가장 큰 수 만들기 문제
+# Q2. 가장 큰 수 만들기 문제
 
-def solution_1(N, M, K, input_list):
+def solution_1_Q2(N, M, K, input_list):
     input_list.sort()
     count = 0
     result = 0
@@ -38,7 +38,7 @@ def solution_1(N, M, K, input_list):
     return result
 
 
-def solution_2(N, M, K, input_list):
+def solution_2_Q2(N, M, K, input_list):
     input_list.sort()
     
     count = M // (K+1)
@@ -50,9 +50,9 @@ def solution_2(N, M, K, input_list):
 
 
 
-# 숫자 카드 게임 문제
+# Q3. 숫자 카드 게임 문제
 
-def solution(N, M, input_matrix):
+def solution_Q3(N, M, input_matrix):
     result = 0
     
     for i in range(N):
@@ -68,7 +68,7 @@ def solution(N, M, input_matrix):
 
 
 
-# 1이 될 때까지 문제
+# Q4. 1이 될 때까지 문제
 
 '''
 남은 숫자가 K의 값보다 작아졌을 때를 고려하지 못한 실수가 나올 수 있다.
@@ -77,7 +77,7 @@ N 값이 0이 될 때까지가 아닌 1이 될 때까지이기 때문에,
 유의가 필요하다.
 '''
 
-def solution(N, K):
+def solution_Q4(N, K):
     result = 0
     
     while N >= K:
