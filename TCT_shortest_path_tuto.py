@@ -102,3 +102,20 @@ def dijkstra_heap(start):
 			if cost < distance[i[0]]:
 				distance[i[0]] = cost
 				heapq.heappush(q, (cost, i[0]))
+
+
+
+
+# 플로이드 워셜 알고리즘
+'''
+다익스트라 알고리즘의 경우, 시작점에서 다른 모든 노드에 대한 최단거리를 찾는 알고리즘이었다.
+
+플로이드 워셜 알고리즘은 모든 노드에 대해서 각각 모든 노드에 대한 최단거리를 찾는 알고리즘이다.
+즉, 2차원의 형태 결과값을 도출한다.
+'''
+
+def floyd_warshall():
+	for node in range(1, n+1):
+		for a in range(1, n+1):
+			for b in range(1, n+1):
+				graph[a][b] = min(graph[a][b], graph[a][node] + graph[node][b])
