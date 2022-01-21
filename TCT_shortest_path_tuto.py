@@ -119,3 +119,56 @@ def floyd_warshall():
 		for a in range(1, n+1):
 			for b in range(1, n+1):
 				graph[a][b] = min(graph[a][b], graph[a][node] + graph[node][b])
+
+
+
+# Q1. 미래도시
+
+# graph info - floyd warshall 알고리즘을 사용하기 위해 그래프를 2차원으로 입력 받는다.
+node_count, edge_count = map(int, input().split())
+graph = [[INF] * (node_count+1) for _ in range(node_count+1)]
+
+# 자기 자신으로의 이동 비용을 0으로 초기화
+for i in range(1, len(graph)):
+	graph[i][i] = 0
+
+for _ in range(1, node_count+1):
+	a, b = map(int, input().split())
+	graph[a][b] = 1
+	graph[b][a] = 1
+
+start = 1
+destination, waypoint = map(int, input().split())
+
+def solution_1_Q1(start, waypoint, destination, graph):
+	for i in range(1, len(graph)):
+		for j in range(1, len(graph)):
+			for k in range(1, len(graph)):
+				cost = min(graph[i][j], graph[i][k] + graph[k][j])
+				graph[i][j] = cost
+
+	result = graph[start][waypoint] + graph[waypoint][destination]
+	if result >= INF:
+		return -1
+	else:
+		return result
+
+
+# 근데 위 문제의 경우 시작점, 경유점, 도착점이 모두 입력값으로 주어진다.
+# 따라서 모든 경로에 대해서 최단거리를 갱신할 필요가 없지 않을까?
+def solution_2_Q2(start, waypoint, destination, graph):
+	for i in range(1, len(graph)):
+		for j in range(1, len(graph)):
+			cost = min(graph[start][i], graph[start][j] + graph[j][i])
+			graph[start][i] = cost
+
+	for i in range(1, len(graph)):
+		for j in range(1, len(graph)):
+			cost = min(graph[waypoint][i], graph[waypoint][j] + graph[j][i])
+			graph[waypoint][i] = cost
+
+	result = graph[start][waypoint] + graph[waypoint][destination]
+	if result >= INF:
+		return -1
+	else:
+		return result
