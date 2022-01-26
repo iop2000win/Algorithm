@@ -172,3 +172,44 @@ def solution_2_Q2(start, waypoint, destination, graph):
 		return -1
 	else:
 		return result
+
+
+
+# Q2. 전보
+# 전형적인 다익스트라 알고리즘 문제
+
+def solution(graph, start):
+	INF = 1e9
+	cost_list = [INF] * (len(graph) + 1)
+	cost_list[start] = 0
+
+	# 많은 양의 데이터를 처리하기 위해 heapq활용
+	q = []
+	heapq.heappush(q, (cost_list[start], start))
+
+	while q:
+		cost, now_node = heapq.heappop() # 해당 노드까지로의 최단 거리 정보
+
+		if cost_list[now_node] < cost:
+			continue
+
+		# 현재 노드와 연결된 노드들의 최단거리 계산
+		for to in graph[now_node]:
+			to_cost = to[0]
+			to_node = to[1]
+			new_cost = cost + to_cost
+
+			if new_cost < cost_list[to_node]:
+				cost_list[to_node] = new_cost
+				heapq.heappush(q, (new_cost, to_node))
+
+	# cost_list 업데이트 후, 정답처리를 위한 작업
+	city_count = 0
+	max_time = 0
+
+	for i in range(1, len(cost_list)):
+		if cost_list[i] != INF:
+			city_count += 1
+			max_time = max(max_time, cost_list[i])
+
+	return	city_count-1, max_time
