@@ -121,8 +121,10 @@ def get_subsets_3(input_list):
     return subsets
 
 
+# Q4. 만들 수 없는 금액
 
-# Q4. 볼링공 고르기 문제
+
+# Q5. 볼링공 고르기 문제
 
 def solution_1_Q4(N, M, input_list):
     result = 0
@@ -168,3 +170,33 @@ def solution_2_Q4(N, M, input_list):
         result += count * N
 
     return result
+
+
+
+# Q6. 무지의 먹방 라이브
+'''
+기본적인 문제 풀이 방법은 어렵지 않으나, 1차원 적인 접근 방식으로는 연산 시간상의 문제로 효율성 테스트에서 불합격한다.
+수학적인 아이디어를 통해 연산시간을 대폭 줄일 방법을 떠올려야 한다.
+'''
+
+def solution_1_Q6(food_times, k): # 해당 풀이는 효율성 테스트를 합격하지 못한 코드이다.
+    time = 0
+    food_num = 0
+
+    while sum(food_times) != 0:
+        if food_times[food_num] == 0:
+            while food_times[food_nu] == 0:
+                food_num += 1
+                if food_num >= len(food_times):
+                    food_num = food_num % len(food_times)
+
+        if time == k:
+            return food_num + 1
+
+        food_times[food_num] -= 1
+        food_num += 1
+        if food_num >= len(food_times):
+            food_num = 0
+        time += 1
+
+    return -1
