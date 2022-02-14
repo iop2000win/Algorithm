@@ -184,7 +184,7 @@ def solution(graph, start):
 	cost_list[start] = 0
 
 	# 많은 양의 데이터를 처리하기 위해 heapq활용
-	q = []
+	q = []ㅡㅇ
 	heapq.heappush(q, (cost_list[start], start))
 
 	while q:
