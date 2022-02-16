@@ -208,3 +208,52 @@ for _ in range(T):
         
     result = solution(graph)
     print(result)
+
+
+
+# Q 7562. 나이트의 이동
+import sys
+from collections import deque
+
+def solution_Q7562(n, row, col, r_dest, c_dest):
+    graph = [[0]*n for x in range(n)]
+    move_pattern = [(2, 1),
+                    (2, -1),
+                    (-2, 1),
+                    (-2, -1),
+                    (1, 2),
+                    (1, -2),
+                    (-1, 2),
+                    (-1, -2)]
+
+    move_count = 0
+    q = deque([(row, col, move_count)])
+    graph[row][col] = 1
+
+    while q:
+        r, c, move_count = q.popleft()
+        if (r == r_dest) & (c == c_dest):
+            return move_count
+
+        for move in move_pattern:
+            r_ = r + move[0]
+            c_ = c + move[1]
+            
+            if (r_ < 0) | (r_ > n-1) | (c_ < 0) | (c_ > n-1):
+                continue
+            
+            if graph[r_][c_] == 0:
+                q.append((r_, c_, move_count + 1))
+                graph[r_][c_] = 1
+                
+    return -1
+
+
+T = int(sys.stdin.readline())
+for _ in range(T):
+    n = int(sys.stdin.readline())
+    row, col = map(int, sys.stdin.readline().split())
+    r_dest, c_dest = map(int, sys.stdin.readline().split())
+
+    result = solution_Q7562(n, row, col, r_dest, c_dest)
+    print(result)
