@@ -257,3 +257,33 @@ for _ in range(T):
 
     result = solution_Q7562(n, row, col, r_dest, c_dest)
     print(result)
+
+
+
+# Q 1697. 숨바꼭질
+from collections import deque
+
+n, k = map(int, input().split())
+
+def solution_Q1697(start, dest):
+    visited = [0] * 100001
+
+    q = deque([(start, 0)])
+    visited[start] = 1
+
+    while q:
+        now, time = q.popleft()
+        if now == dest:
+            return time
+
+        moves = [now+1, now-1, now*2]
+        for move in moves:
+            if (0 <= move <= 100000) and (visited[move] == 0):
+                q.append((move, time+1))
+                visited[move] = 1
+
+result = solution(n, k)
+print(result)
+
+
+# Q 2206. 벽 부수고 이동하기 ***
