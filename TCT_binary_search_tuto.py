@@ -56,6 +56,70 @@ target = 7
 '''
 
 
+# Q1. 부품 찾기
+'''
+기본적인 이진 탐색 알고리즘을 작성할 수 있는지 묻는 문제
+재귀함수와 반복문을 사용하는 두 종류의 이진 탐색 알고리즘을 작성해보고,
+계수 정렬의 개념을 이용한 풀이도 작성해보자.
+'''
+
+# 재귀 함수를 이용한 이진탐색 방법
+def solution_Q1_1(input_list, start, end, target):
+	if start > end:
+		return None
+
+	mid_index = (start + end) // 2
+
+	if input_list[mid_index] == target:
+		return mid_index
+	elif input_list[mid_index] < target:
+		return solution_Q1_1(input_list, mid_index+1, end, target)
+	else:
+		return solution_Q1_1(input_list, start, mid_index-1, target)
+
+# 반복문을 이용한 이진탐색 방법
+def solution_Q1_2(input_list, start, end, target):
+	while start <= end:
+		mid_index = (start + end) // 2
+
+		if input_list[mid_index] == target:
+			return mid_index
+		elif input_list[mid_index] < target:
+			start = mid_index + 1
+		else:
+			end = mid_index - 1
+
+	return None
+
+# 계수정렬을 이용한 탐색 방법
+# 계수정렬을 이용할 경우 target을 하나씩 받는 것보다 한번에 리스트로 받는게 낫다.
+# 그래야 count_list를 한 번만 생성하므로
+def solution_Q1_3(input_list, target):
+	count_list = [0] * 1000001
+
+	for item in input_list:
+		count_list[item] = 1
+
+	if count_list[target] != 0:
+		return target
+	else:
+		return None
+
+def solution_Q1_4(input_list, target_list):
+	count_list = [0] * 1000001
+	result_list = [0] * len(target_list)
+
+	for item in input_list:
+		count_list[item] = 1
+
+	for i, target in enumerate(target_list):
+		if count_list[target] != 0:
+			result_list[i] = 1
+
+	return result_list
+
+
+
 # Q2. 떡볶이 떡 만들기
 '''
 전형적인 이진탐색을 통한 파라메트릭 서치 문제
@@ -66,7 +130,7 @@ target = 7
 문제를 받았을 때, 주어진 파라미터의 범위를 보고 대략적인 풀이 방향을 잡는 것도 중요!
 '''
 
-def solution(rq, input_list):
+def solution_Q2(rq, input_list):
 	start = 0
 	end = max(input_list)
 
