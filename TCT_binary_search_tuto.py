@@ -145,6 +145,30 @@ def solution_Q2(rq, input_list):
 			end = mid-1
 		else:
 			result = mid
-			start = mid+1
+			start = mid+1 # 반복할 수록 탐색 결과 값은 커진다.
+
+	return result
+
+# 다시 풀어본 풀이
+# (가장 최대의 높이를 찾는 부분에 대한 풀이 부족)
+def solution_Q2_2(input_list, target):
+	start = 0
+	end = input_list[-1] # 정렬 된 리스트를 입력 받는다고 가정
+
+	result = 0 # ***
+
+	while start <= end:
+		total_length = 0
+		mid = (start + end) // 2
+
+		for item in input_list:
+			cut = (item - mid) if (item - mid) > 0 else 0
+			total_length += cut
+
+		if total_length >= target:
+			result = mid
+			start = mid + 1
+		else:
+			end = mid - 1
 
 	return result
