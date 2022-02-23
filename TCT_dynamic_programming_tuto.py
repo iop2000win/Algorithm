@@ -59,7 +59,7 @@ def fibo_memo_bu(x):
 정수 X가 주어졌을 때, 주어진 연산을 통해서 해당 정수를 1로 만드는 가장 최연소 연산수를 구하는 문제
 점화식으로 표현이 되는 문제인지를 항상 생각하자
 '''
-def solution_Q1(input_num):
+def solution_Q1_bottomup(input_num):
 	d_list = [0] * 30001
 
 	for i in range(2, 30001):
@@ -77,6 +77,29 @@ def solution_Q1(input_num):
 		d[i] = min(result, a_result, b_result, c_result)
 
 	return d_list[input_num]
+
+
+def solution_Q1_topdown(input_num):
+	d_list = [0] * len(input_num)
+
+	def solution(input_num):
+		if input_num == 1:
+			return 0
+		d_list[input_num] = solution(input_num-1) + 1
+
+		if input_num % 2 == 0:
+			d_list[input_num] = min(d_list[input_num], solution(input_num//2) + 1)
+		elif input_num % 3 == 0:
+			d_list[input_num] = min(d_list[input_num], solution(input_num//3) + 1)
+		elif input_num % 5 == 0:
+			d_list[input_num] = min(d_list[input_num], solution(input_num//5) + 1)
+		else:
+			pass
+
+		return d_list[input_num]
+
+	result = solution(input_num)
+	return result
 
 
 # Q2. 개미 전사 ***
@@ -97,3 +120,24 @@ def solution_Q3(input_num):
 
 
 # Q4. 효율적인 화폐구성 ***
+'''
+책에서 제공해주는 풀이가 훨씬 간결하다.
+책에서 나온 풀이도 복습하여 해당 방식의 풀이법도 익히도록 하자.
+'''
+
+def solution_Q4(input_list, target):
+	d = [0] * 10001
+	coin_list = sorted(coin_list, reverse = True)
+
+	for coin in coin_list:
+		d[coin] = 1
+
+	for i in range(1, target+1):
+		for coin in coin_list:
+			if (i - coin >= 0) & (d[i - coin] != -1):
+				d[i] = d[i - coin] + 1
+				break
+			else:
+				d[i] = -1
+
+	return d[target]
