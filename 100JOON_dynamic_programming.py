@@ -75,3 +75,89 @@ def solution_Q1932(input_list):
 result = solution_Q1932(tri_list)
 print(result)
 
+
+# Q 2579. 계단 오르기
+
+n = int(input())
+stair_list = [0] + [int(input()) for _ in range(n)]
+
+def solution_Q2579(input_list):
+    d = [0] * (len(input_list))
+    if len(input_list) <= 2:
+        return sum(input_list)
+    
+    d[1] = input_list[1]
+    d[2] = input_list[1] + input_list[2]
+    
+    for i in range(3, len(input_list)):
+        val_1 = d[i-2] + input_list[i]
+        val_2 = d[i-3] + input_list[i-1] + input_list[i]
+        
+        d[i] = max(val_1, val_2)
+        
+    return d[len(input_list)-1]
+
+result = solution_Q2579(stair_list)
+print(result)
+
+
+
+# Q 1463. 1로 만들기
+
+input_num = int(input())
+
+def solution_1463(input_num):
+    d = [0] * (input_num + 1)
+    
+    for i in range(2, input_num + 1):
+        min_val = d[i-1] + 1
+        if i%3 == 0:
+            min_val = min(min_val, d[i//3] + 1)
+        if i%2 == 0:
+            min_val = min(min_val, d[i//2] + 1)
+        
+        d[i] = min_val
+        
+    return d[input_num]
+
+result = solution_1463(input_num)
+print(result)
+
+
+
+# Q 10844. 쉬운 계단 수
+'''
+더 간결한 풀이가 있을 것이다. 복습 단계에서 생각해보자!
+'''
+input_num = int(input())
+
+def solution_Q10844(input_num):
+    d = [0] + [1] * 9
+
+    for i in range(1, input_num):
+        num_0 = d[1]
+        num_1 = d[0] + d[2]
+        num_2 = d[1] + d[3]
+        num_3 = d[2] + d[4]
+        num_4 = d[3] + d[5]
+        num_5 = d[4] + d[6]
+        num_6 = d[5] + d[7]
+        num_7 = d[6] + d[8]
+        num_8 = d[7] + d[9]
+        num_9 = d[8]
+
+        d[0] = num_0
+        d[1] = num_1
+        d[2] = num_2
+        d[3] = num_3
+        d[4] = num_4
+        d[5] = num_5
+        d[6] = num_6
+        d[7] = num_7
+        d[8] = num_8
+        d[9] = num_9
+
+    return sum(d) % 1000000000
+
+result = solution_Q10844(input_num)
+print(result)
