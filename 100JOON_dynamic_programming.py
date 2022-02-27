@@ -161,3 +161,9 @@ def solution_Q10844(input_num):
 
 result = solution_Q10844(input_num)
 print(result)
+
+
+
+######
+def solution():
+    return
