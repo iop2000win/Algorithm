@@ -164,6 +164,119 @@ print(result)
 
 
 
-######
-def solution():
-    return
+# Q 9184. 신나는 함수 실행
+'''
+재귀함수에 대한 이해!!!
+dp table의 값을 반환하는 부분을 잘 생각하자!!
+'''
+def solution_Q9184(a, b, c):
+    if (a <= 0) or (b <= 0) or (c <= 0):
+        return 1
+    elif (a > 20) or (b > 20) or (c > 20):
+        return solution_Q9184(20, 20, 20)
+    elif (a < b < c):
+        if d[a][b][c]:
+            return d[a][b][c]
+        else:
+            d[a][b][c] = solution_Q9184(a, b, c-1) + solution_Q9184(a, b-1, c-1) - solution_Q9184(a, b-1, c)
+            return d[a][b][c]
+    else:
+        if d[a][b][c]:
+            return d[a][b][c]
+        else:
+            d[a][b][c] = solution_Q9184(a-1, b, c) + solution_Q9184(a-1, b-1, c) + solution_Q9184(a-1, b, c-1) - solution_Q9184(a-1, b-1, c-1)
+            return d[a][b][c]
+
+while True:
+    a, b, c = map(int, input().split())
+    if (a == -1) and (b == -1) and (c == -1):
+        break
+    
+    result = solution_Q9184(a, b, c)
+    print(f'w({a}, {b}, {c}) = {result}')
+
+
+
+# Q 1904. 01타일
+'''
+문제를 보고 적합한 점화식을 세울 수 있는지 묻는 문제
+점화식을 사용해야하는 문제라고 판단이 되면, 이전 항과 다음 항 간의 관계식을 잘 생각해보자!
+'''
+def solution_Q1904(input_num):
+    d = [0] * 1000001
+    d[1] = 1
+    d[2] = 2
+
+    for i in range(3, input_num+1):
+        d[i] = d[i-2] + d[i-1]
+
+    return d[input_num]
+
+input_num = int(input())
+result = solution_Q1904(input_num)
+print(result)
+
+
+# Q 9461. 파도반 수열
+def solution_Q9461(input_num):
+    d = [0] * 101
+    d[1] = 1
+    d[2] = 1
+    d[3] = 1
+    d[4] = 2
+    d[5] = 2
+
+    for i in range(6, input_num + 1):
+        d[i] = d[i-1] + d[i-5]
+
+    return d[input_num]
+
+input_num = int(input())
+result = solution_Q9461(input_num)
+print(result)
+
+
+# Q 11053. 가장 긴 증가하는 부분 수열
+def solution_Q11053(input_list):
+    d = [1] * 1001
+
+    for i in range(1, len(input_list)):
+        for j in range(i):
+            if input_list[i] > input_list[j]:
+                d[i] = max(d[i], d[j] + 1)
+
+    return max(d)
+
+n = int(input())
+input_list = list(map(int, input().split()))
+
+result = solution_Q11053(input_list)
+print(result)
+
+
+
+# Q 11054. 가장 긴 바이토닉 부분 수열
+def solution_Q11054(input_list):
+    d_inc = [1] * 1001
+    d_dec = [1] * 1001
+
+    for i in range(len(input_list)):
+        for j in range(i):
+            if input_list[i] > input_list[j]:
+                d_inc[i] = max(d_inc[i], d_inc[j] + 1)
+
+    for i in range(len(input_list)-1, -1, -1):
+        for j in range(len(input_list)-1, i, -1):
+            if input_list[i] > input_list[j]:
+                d_dec[i] = max(d_dec[i], d_dec[j] + 1)
+
+    for i in range(n):
+        d_inc[i] = d_inc[i] + d_dec[i]
+
+    return max(d_inc) - 1
+
+n = int(input())
+input_list = list(map(int, input().split()))
+
+result = solution_Q11054(input_list)
+print(result)
