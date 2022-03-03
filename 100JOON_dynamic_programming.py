@@ -280,3 +280,38 @@ input_list = list(map(int, input().split()))
 
 result = solution_Q11054(input_list)
 print(result)
+
+
+# Q 1912. 연속합
+def solution_Q1912(input_list):
+    d = [0] * n
+    d[0] = input_list[0]
+
+    for i in range(1, n):
+        d[i] = max(input_list[i], d[i-1] + input_list[i])
+
+    return max(d)
+
+n = int(input())
+input_list = list(map(int, input().split()))
+
+result =solution_Q1912(input_list)
+print(result)
+
+
+# Q 2565. 전깃줄
+def solution_Q2565(input_list):
+    d = [1] * n
+    for i in range(len(input_list)):
+        for j in range(i):
+            if input_list[i][1] > input_list[j][1]:
+                d[i] = max(d[i], d[j] + 1)
+
+    result = n-max(d)
+    return result
+
+n = int(input())
+input_list = sorted([tuple(map(int, input().split())) for _ in range(n)], key = lambda x: x[0])
+
+result = solution_Q2565(input_list)
+print(result)
