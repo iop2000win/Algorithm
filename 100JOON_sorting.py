@@ -38,8 +38,6 @@ def solution_Q2750_1(input_list):
 ### 퀵 정렬을 이용한 정렬
 
 ### 계수 정렬을 이용한 정렬 (*** 음수에 대해서는 정렬을 할 수 없다.)
-# 계수 정렬을 이용한 수 정렬
-
 def count_sorting(input_list):
 	input_list = input_list.copy()
 	count_list = [0] * max(input_list)
@@ -57,6 +55,20 @@ def count_sorting(input_list):
     
 	return
 
+
+# Q 25305. 커트라인
+def solution_Q25305(input_list, k):
+	input_list = sorted(input_list, reverse = True)
+
+	result = input_list[k-1]
+	print(result)
+
+	return
+
+# n, k = map(int, input().split())
+# scores = list(map(int, input().split()))
+
+# _ = solution_Q25305(scores, k)
 
 
 # Q 2108. 통계학
