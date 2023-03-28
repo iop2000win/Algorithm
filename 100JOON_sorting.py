@@ -56,6 +56,20 @@ def count_sorting(input_list):
 	return
 
 
+# Q 2587. 대표값2
+import math
+def solution_2587(input_list):
+	input_list = sorted(input_list)
+
+	mean = int(sum(input_list) / len(input_list))
+	median = input_list[math.ceil(len(input_list) / 2) -1]
+
+	print(mean)
+	print(median)
+
+	return
+
+
 # Q 25305. 커트라인
 def solution_Q25305(input_list, k):
 	input_list = sorted(input_list, reverse = True)
