@@ -66,6 +66,7 @@ def dijkstra(start):
 		distance[j[0]] = j[1]
 
 	# 시작점(1)을 제외한 나머지 node들에 대해서 최단거리 리스트 갱신 시작
+	# 모든 노드에 대한 방문 처리를 하기 위해 for 문 사용
 	for i in range(n-1):
 		# 방문하지 않은 node들 중, 현재까지 최단거리 값을 가진 node를 찾아간다.
 		now = get_smallest_node()
@@ -90,6 +91,7 @@ def dijkstra_heap(start):
 	# 각 node에 대한 비용이 적은 순으로 queue에 입력된 뒤,
 	# 해당 연결에 대한 최단거리 계산이 끝나면 queue에서 제거된다.
 	# 따라서 queue에 데이터가 모두 없어지게 되면 모든 연결에 대한 처리가 끝났다는 의미이다.
+	# (방문 처리가 따로 필요없다. heapq 처리가 이미 방문처리의 개념)
 	while q:
 		dist, now = heapq.heappop(q)
 
