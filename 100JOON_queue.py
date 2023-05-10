@@ -212,3 +212,52 @@ size = 0
 for t in range(T):
     input_str = sys.stdin.readline()
     solution(input_str)
+
+
+# -----------------------------------------------------------------------------------------------
+# Q 5430. AC --- 어디서 틀린 걸까?? 맞게 작성한 것 같은데...
+
+import re
+import sys
+from collections import deque
+
+def solution(input_str, size, input_list):
+    way_cnt = 0
+    deq = deque(input_list)
+    
+    for i in range(len(input_str)):
+        if input_str[i] == 'R':
+            way_cnt += 1
+            
+        elif input_str[i] == 'D':
+            if size == 0:
+                print('error')
+                return
+        
+            elif way_cnt % 2 == 0:
+                deq.popleft()
+                size -= 1
+
+            elif way_cnt % 2 == 1:
+                deq.pop()
+                size -= 1
+            
+        else:
+            pass
+        
+    if way_cnt % 2 == 0:
+        result = list(deq)
+        print('[' + ','.join(map(str, result)) + ']')
+    else:
+        result = sorted(deq, reverse = True)
+        print('[' + ','.join(map(str, result)) + ']')
+        
+    return
+
+T = int(input())
+for t in range(T):
+    input_str = input()
+    size = int(input())
+    input_list = list(map(int, re.findall('[0-9]+', input())))
+    
+    solution(input_str, size, input_list)
