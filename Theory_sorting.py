@@ -1,4 +1,18 @@
 '''
+다양한 정렬 알고리즘에 대한 이론
+
+1. 버블 정렬
+2. 선택 정렬
+3. 삽입 정렬
+4. 힙 정렬
+5. 병합 정렬
+6. 퀵 정렬
+7. 쉘 정렬
+8. 기수 정렬 (자리수가 정해진 양의 정수에 대해서만 가능)
+9. 계수 정렬 (양의 정수에 대해서만 가능)
+'''
+
+'''
 =======================================================================================================================
 <<<버블 정렬>>>
 
@@ -37,3 +51,58 @@ def bubble_sort(input_list):
 <<<선택 정렬>>>
 
 '''
+
+def selection_sort(input_list):
+	for i in range(len(input_list)):
+		min_index = i
+
+		for j in range(i+1, len(input_list)):
+			if input_list[min_index] > input_list[j]:
+				min_index = j
+
+		input_list[i], input_list[min_index] = input_list[min_index], input_list[i]
+
+	return
+
+
+'''
+=======================================================================================================================
+<<<삽입 정렬>>>
+
+위까지의 정렬 알고리즘 보다는 약간 더 헷갈린다.
+'''
+
+def insertion_sort(input_list):
+	for i in range(1, len(input_list)):
+		for j in range(i-1, -1, -1):
+			if input_list[j+1] < input_list[j]:
+				input_list[j+1], input_list[j] = input_list[j], input_list[j+1]
+			else:
+				break
+
+	return
+
+
+def insertion_sort2(input_list):
+	for i in range(1, len(input_list)):
+		key = input_list[i]
+		j = i-1
+
+		while (j >= 0) and (input_list[j] > key):
+			input_list[j+1] = input_list[j]
+			j -= 1
+
+		input_list[j+1] = key
+
+	return
+
+
+'''
+=======================================================================================================================
+<<<힙 정렬>>>
+
+'''
+
+def heap_sort(input_list):
+
+	return
