@@ -104,3 +104,90 @@ def solution_Q2839(input_num):
 input_num = int(input())
 result = solution_Q2839(input_num)
 print(result)
+
+
+
+# Q 2745. 진법 변환, Q 11005 진법 변환 2 (역으로 진행하는 것으로 개념 자체는 동일하다)
+
+def solution_Q2745(input_num, arith_num):
+    arith_dic = {}
+    for i in range(36): # 문제에서 최대 36진법까지로 정하고 있다.
+        if i <= 9:
+            arith_dic[str(i)] = i
+        else:
+            key = chr(i + 55)
+            arith_dic[key] = i
+
+    result = 0
+
+    for i, spell in enumerate(input_num):
+        val = arith_dic[spell] * (arith_num ** (len(input_num) - (i+1)))
+        result += val
+
+    return result
+
+input_num, arith_num = input().split()
+arith_num = int(arith_num)
+result = solution_Q2745(input_num, arith_num)
+print(result)
+
+
+def solution_Q11005(input_num, arith_num):
+    arith_dic = {}
+    for i in range(36): # 문제에서 최대 36진법까지로 정하고 있다.
+        if i <= 9:
+            arith_dic[i] = str(i)
+        else:
+            val = chr(i + 55)
+            arith_dic[i] = val
+
+    result = ''
+
+    while True:
+        remainder = n % b
+        n = n // b
+
+        result = s_dic[remainder] + result
+
+        if n == 0:
+            break
+
+    return result
+
+input_num, arith_num = map(int, input().split())
+result = solution_Q11005(input_num, arith_num)
+print(result)
+
+
+def solution_Q1193(input_num):
+    S = 0
+    num = 0
+
+    while True:
+        num += 1
+        S += num
+
+        if S > input_num:
+            S -= num
+            num -= 1
+            break
+
+    if input_num-S == 0:
+        num1 = num
+        num2 = 1
+
+    else:
+        num += 1
+        num1 = input_num-S
+        num2 = num - (input_num-S-1)
+
+    if num % 2 == 0:
+        result = f'{num1}/{num2}'
+    else:
+        result = f'{num2}/{num1}'
+
+    return result
+
+input_num = int(input())
+result = solution_Q1193(input_num)
+print(result)
