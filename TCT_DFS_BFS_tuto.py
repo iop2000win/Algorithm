@@ -108,7 +108,7 @@ def DFS_list(graph, start, visited):
 		visit_sequence.append(start)
 
 		for node in graph[start]:
-		dfs_(graph, node, visited)
+			dfs_(graph, node, visited)
 
 	dfs_(graph, start, visited)
 

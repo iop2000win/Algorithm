@@ -1,6 +1,6 @@
 '''
 백준 온라인 저지 사이트에서 제공하는 단계별 문제풀이 카테고리의
-동적 계획법1 카테로리의 문제 풀이 코드
+재귀함수/동적 계획법1 카테고리의 문제 풀이 코드
 '''
 
 # Q 1003. 피보나치 함수
@@ -315,3 +315,57 @@ input_list = sorted([tuple(map(int, input().split())) for _ in range(n)], key = 
 
 result = solution_Q2565(input_list)
 print(result)
+
+
+# Q 27433. 팩토리얼
+def solution_Q27433(input_num):
+    if (input_num == 0) or (input_num == 1):
+        return 1
+    
+    else:
+        return input_num * solution(input_num-1)
+
+n = int(input())
+
+result = solution_Q27433(n)
+print(result)
+
+
+# Q 10870. 피보나치 수열
+def solution_Q10870(input_num):
+    if input_num == 0:
+        return 0
+    elif input_num == 1:
+        return 1
+    else:
+        return solution_Q10870(input_num-1) + solution_Q10870(input_num-2)
+
+n = int(input())
+
+result = solution_Q10870(n)
+print(result)
+
+
+# Q 25501. 재귀의 귀재
+# what is Palindrome?
+def palin(input_str, l, r):
+    global cnt
+    cnt += 1
+    
+    if l >= r:
+        return 1
+    elif input_str[r] != input_str[l]:
+        return 0
+    else:
+        return palin(input_str, l+1, r-1)
+    
+T = int(input())
+for t in range(T):
+    txt = input()
+    cnt = 0
+    
+    result = palin(txt, 0, len(txt)-1)
+    print(result, cnt)
+
+
+# Q 2447. 별찍기
