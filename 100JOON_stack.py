@@ -43,7 +43,40 @@ size = 0
 T = int(input())
 for t in range(T):
 	input_txt = sys.stdin.readline()
-	_ = stack(input_txt)
+	_ = solution_Q10828(input_txt)
+
+
+# -----------------------------------------------------------------------------------------------
+# Q 28278. 스택2
+
+import sys
+
+n = int(sys.stdin.readline())
+
+stack = []
+for i in range(n):
+    x = sys.stdin.readline().split()
+    
+    if x[0] == '1':
+        stack.append(int(x[1]))
+    elif x[0] == '2':
+        if len(stack) <= 0:
+            print(-1)
+        else:
+            pop = stack.pop()
+            print(pop)
+    elif x[0] == '3':
+        print(len(stack))
+    elif x[0] == '4':
+        if len(stack) <= 0:
+            print(1)
+        else:
+            print(0)
+    else:
+        if len(stack) <= 0:
+            print(-1)
+        else:
+            print(stack[-1])
 
 
 # -----------------------------------------------------------------------------------------------
@@ -186,4 +219,51 @@ print(*result, sep = '\n')
 
 
 # -----------------------------------------------------------------------------------------------
-# Q 17299. 오등큰수
+# Q 28279. 덱2
+
+import sys
+from collections import deque
+
+n = int(sys.stdin.readline())
+deq = deque()
+
+for i in range(n):
+    x = sys.stdin.readline().split()
+    
+    if x[0] == '1':
+        deq.appendleft(int(x[1]))
+    elif x[0] == '2':
+        deq.append(int(x[1]))
+    elif x[0] == '3':
+        if len(deq) != 0:
+            pop = deq.popleft()
+            print(pop)
+        else:
+            print(-1)
+    elif x[0] == '4':
+        if len(deq) != 0:
+            pop = deq.pop()
+            print(pop)
+        else:
+            print(-1)
+    elif x[0] == '5':
+        print(len(deq))
+    elif x[0] == '6':
+        if len(deq) == 0:
+            print(1)
+        else:
+            print(0)
+    elif x[0] == '7':
+        if len(deq) != 0:
+            print(deq[0])
+        else:
+            print(-1)
+    else:
+        if len(deq) != 0:
+            print(deq[-1])
+        else:
+            print(-1)
+
+
+# -----------------------------------------------------------------------------------------------
+# Q 2346. 풍선 터트리기

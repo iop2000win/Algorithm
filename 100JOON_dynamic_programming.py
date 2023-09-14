@@ -347,7 +347,7 @@ print(result)
 
 
 # Q 25501. 재귀의 귀재
-# what is Palindrome?
+# what is Palindrome? 회문, 거꾸로 읽어도 제대로 읽은 것과 동일한 배열
 def palin(input_str, l, r):
     global cnt
     cnt += 1
@@ -373,3 +373,28 @@ for t in range(T):
 # p p p
 # p 0 p
 # p p p 형태로 출력하는 것을 재귀적으로 구현하는 문제
+def solution_2447(input_num):
+    if input_num == 1:
+        return '*'
+
+    x_pat = solution(input_num/3)
+    x_len = len(x_pat.split('\n')[0])
+
+    new_pat = ''
+    for x in x_pat.split('\n'):
+        new_pat += x*3
+        new_pat += '\n'
+
+        new_pat += f"{x}{' '*x_len}{x}"
+        new_pat += '\n'
+
+        new_apt += x*3
+        new_pat += '\n'
+
+    new_pat = new_pat.rstrip('\n')
+
+    return new_pat
+
+input_num = int(input())
+result = solution_2447(input_num)
+print(result)
