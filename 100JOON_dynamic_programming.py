@@ -1,6 +1,6 @@
 '''
 백준 온라인 저지 사이트에서 제공하는 단계별 문제풀이 카테고리의
-재귀함수/동적 계획법1 카테고리의 문제 풀이 코드
+재귀함수/동적 계획법1 & 재귀함수 카테고리의 문제 풀이 코드
 '''
 
 # Q 1003. 피보나치 함수
@@ -25,8 +25,6 @@ def fibo(input_num):
             count_1[i] = count_1[i-1] + count_1[i-2]
             
     print(count_0[input_num], count_1[input_num])
-
-
 
 
 # Q 1149. RGB 거리 ***
@@ -369,15 +367,17 @@ for t in range(T):
 
 
 # Q 2447. 별찍기
-# 이전 스텝의 패턴에 대해서,
-# p p p
-# p 0 p
-# p p p 형태로 출력하는 것을 재귀적으로 구현하는 문제
-def solution_2447(input_num):
+'''
+이전 스텝의 패턴에 대해서,
+p p p
+p 0 p
+p p p 형태로 출력하는 것을 재귀적으로 구현하는 문제
+'''
+def solution_Q2447(input_num):
     if input_num == 1:
         return '*'
 
-    x_pat = solution(input_num/3)
+    x_pat = solution_Q2447(input_num/3)
     x_len = len(x_pat.split('\n')[0])
 
     new_pat = ''
@@ -396,5 +396,59 @@ def solution_2447(input_num):
     return new_pat
 
 input_num = int(input())
-result = solution_2447(input_num)
+result = solution_Q2447(input_num)
 print(result)
+
+
+# Q 11729. 하노이탑 이동순서
+'''
+단순히 하노이탑의 이동 횟수만 카운트하는 것은 점화식을 이용하면 매우 간단하다.
+move_cnt = move_cnt_before + 1 + move_cnt_before
+- 이전 단계를 통해 마지막 한칸을 제외한 모든 탑을 옮기는 횟수(move_cnt_before)
+- 마지막 칸을 세번째 칸으로 옮기는 횟수(1)
+- 1번 단계에서 옮긴 탑을 다시 마지막 칸으로 옮기는 횟수, 이전 단계의 이동 횟수와 동일(move_cnt_before)
+
+but, 이 문제에서는 단순히 횟수만 구하는게 아니라 각 탑의 이동 루트를 모두 계산해야 하는 문제이다.
+개념은 똑같다. 탑의 출발지점과 도착지점만 변경해주면 되는 문제
+* python에서 문자열에 대해서 제공하는 maketrans, translate 메서드를 활용하면 문제를 쉽게 해결할 수 있다.
+'''
+def solution_Q11729(input_num):
+    # 재귀 함수에서 가장 중요한 것은, 재귀함수가 종료되는 시점을 설정해주는 것!
+    if input_num == 1:
+        route = '1 3'
+
+        return route
+
+    else:
+        x_route = solution_Q11729(input_num-1)
+
+        tbl_1 = str.maketrans('23', '32')
+        tbl_2 = str.maketrans('12', '21')
+
+        route = x_route.translate(tbl_1) + '\n1 3\n' + x_route.translate(tbl_2)
+
+        return route
+
+input_num = int(input())
+result = solution_Q11729(input_num)
+print(len(result.split('\n')))
+print(result)
+
+
+# Q 4779. 칸토어 집합
+def solution_Q4779(input_num):
+    if input_num == 1:
+        return '-'
+    else:
+        l = input_num // 3
+
+        result = solution_Q4779(l) + ' '*l + solution_Q4779(l)
+        return result
+
+lines = sys.stdin.readlines()
+for line in lines:
+    input_num = int(line.strip())
+    input_num = 3 ** input_num
+
+    result = solution_Q4779(input_num)
+    print(result)
