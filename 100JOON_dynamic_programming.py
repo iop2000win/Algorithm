@@ -452,3 +452,22 @@ for line in lines:
 
     result = solution_Q4779(input_num)
     print(result)
+
+
+# Q 24416. 피보나치 수열 2
+def solution_Q24416(input_num):
+    recur_list = [0] * input_num+1
+    dynamic_cnt = 0
+
+    for i in range(1, input_num+1):
+        if i in (1, 2):
+            recur_list[i] = 1
+        else:
+            dynamic_cnt += 1
+            recur_list[i] = recur_list[i-1] + recur_list[i-2]
+
+    return recur_list[input_num], dynamic_cnt
+
+input_num = int(input())
+recur_cnt, dynamic_cnt = solution_Q24416(input_num)
+print(recur_cnt, dynamic_cnt)
