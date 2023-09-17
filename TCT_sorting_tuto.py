@@ -7,7 +7,6 @@
 2. 해당 데이터를 가장 앞으로 보낸다.
 위 방식의 반복으로 정렬이 이루어진다.
 '''
-
 def select_sort(input_list):
 	for i in range(len(input_list)):
 		min_index = i
@@ -26,7 +25,6 @@ def select_sort(input_list):
 주어진 배열에서, 각 원소가 위치해야할 장소를 찾아 해당 위치에 원소를 삽입하는 방식
 거의 정렬이 이루어진 상태의 배열에 대해서 그 효율성이 매우 높다.
 '''
-
 def insert_sort(input_list):
 	for i in range(1, len(input_list)):
 		for j in range(i, 0, -1):
@@ -43,7 +41,6 @@ def insert_sort(input_list):
 기준 데이터를 설정, 그 기준보다 큰 데이터와 작은 데이터의 위치를 변환
 (이진 탐색과 그 형태가 매우 비슷하다)
 '''
-
 def quick_sort_1(input_list, start, end):
 	if start >= end:
 		return
@@ -82,7 +79,6 @@ def quick_sort_2(input_list):
 
 
 # 계수 정렬
-
 def count_sort(input_list):
 	count = [0] * (max(input_list) + 1)
 	result = []
@@ -97,6 +93,38 @@ def count_sort(input_list):
 	return result
 
 
+# 버블 정렬
+def bubble_sort(input_list):
+	for i in range(len(input_list)):
+		idx = 0
+		l = len(input_list) -1
+		while idx +1 <= l:
+			if input_list[idx] > input_list[idx+1]:
+				input_list[idx], input_list[idx+1] = input_list[idx+1], input_list[idx]
+			
+			idx += 1
+
+		l -= 1
+
+	return input_list
+
+
+# 쉘 정렬
+def shell_sort(input_list):
+	return
+
+
+# 힙 정렬
+def heap_sort():
+	return
+
+
+# 기수 정렬
+def radix_sort():
+	return
+
+
+#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 # Q1. 두 배열의 원소 교체
 
 def solution(N, K, list_A, list_B):
