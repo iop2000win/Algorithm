@@ -471,3 +471,7 @@ def solution_Q24416(input_num):
 input_num = int(input())
 recur_cnt, dynamic_cnt = solution_Q24416(input_num)
 print(recur_cnt, dynamic_cnt)
+
+
+# Q 수열문제...
+# 점화식의 개념으로 접근하는 문제가 맞는 것 같긴한데... 풀이 방법이 떠오르지가 않는다.
