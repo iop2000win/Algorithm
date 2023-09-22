@@ -473,5 +473,37 @@ recur_cnt, dynamic_cnt = solution_Q24416(input_num)
 print(recur_cnt, dynamic_cnt)
 
 
+# Q 12865. 평범한 배낭
+'''
+동적계획법의 가장 대표적인 문제로,
+그리디로는 풀리지 않고, 모든 경우의 수를 계산하기에는 연산양이 너무 많은 문제로
+동적계획법을 통해서 풀 수 있다.
+
+동적계획법의 가장 큰 개념은 메모이제이션!
+이전의 연산 값을 저장하고, 이를 바탕으로 이후의 연산을 진행한다!
+'''
+import sys
+
+def solution_Q12865(n, W, goods_list:list): # [(weight, value)]
+    dp = [[0] * (W+1) for _ in range(n+1)]
+
+    for i, (w, v) in enumerate(goods_list):
+        i += 1
+        for j in range(1, W+1):
+            if j >= w:
+                dp[i][j] = max(dp[i-1][j], dp[i-1][j-w] + v)
+            else:
+                dp[i][j] = d[i-1][j]
+
+    return dp[-1][-1]
+
+n, W = map(int, sys.stdin.readline().split())
+goods_list = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+
+result = solution_Q12865(n, W, goods_list)
+print(result)
+
+
+
 # Q 수열문제...
 # 점화식의 개념으로 접근하는 문제가 맞는 것 같긴한데... 풀이 방법이 떠오르지가 않는다.
