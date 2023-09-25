@@ -507,3 +507,19 @@ print(result)
 
 # Q 수열문제...
 # 점화식의 개념으로 접근하는 문제가 맞는 것 같긴한데... 풀이 방법이 떠오르지가 않는다.
+def solution_Q9251(x_str, y_str):
+    dp = [[0] * (len(x_str) + 1) for _ in range(len(y_str) + 1)]
+    for i in range(1, len(y_str) + 1):
+        for j in range(1, len(x_str) + 1):
+            if x_str[j-1] == y_str[i-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+    return dp[len(y_str)][len(x_str)]
+
+x_str = input()
+y_str = input()
+
+result = solution_Q9251(x_str, y_str)
+print(result)
