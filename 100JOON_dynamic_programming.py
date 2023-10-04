@@ -504,8 +504,7 @@ result = solution_Q12865(n, W, goods_list)
 print(result)
 
 
-
-# Q 수열문제...
+# Q 9251. 수열문제
 # 점화식의 개념으로 접근하는 문제가 맞는 것 같긴한데... 풀이 방법이 떠오르지가 않는다.
 def solution_Q9251(x_str, y_str):
     dp = [[0] * (len(x_str) + 1) for _ in range(len(y_str) + 1)]
@@ -522,4 +521,33 @@ x_str = input()
 y_str = input()
 
 result = solution_Q9251(x_str, y_str)
+print(result)
+
+
+# Q 2156. 포도주 시식
+'''
+동적계획법을 사용하는 방식으로 접근은 했지만, 결국 개념적으로 문제를 완벽하게 이해하지 못해서
+계속된 오답을 작성했다. 수학 문제와 같다. 문제에 대해서 개념적으로 이해를 하는 것이 선행되어야 한다!
+* 꼭 다시 풀어보기
+'''
+def solution_Q2156(input_list):
+    dp = [0] * 10000 # 문제에서 최대 입력값의 범위를 10000으로 제한해두었다.
+    
+    for i in range(len(input_list)):
+        if i == 0:
+            dp[i] = input_list[i]
+        elif i == 1:
+            dp[i] = dp[i-1] + input_list[i]
+        else:
+            val1 = dp[i-3] + input_list[i] + input_list[i-1] # 연속된 두 값을 포함하는 경우
+            val2 = dp[i-2] + input_list[i] # 지금 값을 연속하지 않게 포함하는 경우
+            val3 = dp[i-1] # 지금 값을 포함하지 않는 경우
+            dp[i] = max(val1, val2, val3)
+
+    return dp[len(input_list)-1]
+
+n = int(input())
+input_list = [int(input()) for _ in range(n)]
+
+result = solution_Q2156(input_list)
 print(result)
