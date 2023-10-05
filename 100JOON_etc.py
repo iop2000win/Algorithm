@@ -49,3 +49,40 @@ def solution(input_txt_list):
     result = grade_sum / credit_sum
     
     return result
+
+
+
+# Q25192 풀이
+import sys
+
+n = int(sys.stdin.readline())
+cnt = 0
+
+user_list = set()
+for i in range(n):
+    input_str = sys.stdin.readline().strip()
+    if input_str == 'ENTER':
+        user_list = set()
+        continue
+        
+    if input_str not in user_list:
+        cnt += 1
+        user_list.add(input_str)
+        
+print(cnt)
+
+
+# Q26069 풀이
+n = int(input())
+
+result_list = ['ChongChong']
+for _ in range(n):
+    a, b = input().split()
+    
+    if a in result_list:
+        result_list.append(b)
+    if b in result_list:
+        result_list.append(a)
+        
+result_list = list(set(result_list))
+print(len(result_list))
