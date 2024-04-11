@@ -261,3 +261,61 @@ for t in range(T):
     input_list = list(map(int, re.findall('[0-9]+', input())))
     
     solution(input_str, size, input_list)
+
+
+# -----------------------------------------------------------------------------------------------
+# Q 1021. 회전하는 큐
+
+import sys
+from collections import deque
+
+def solution_Q1021(n, input_list):
+    q = deque(range(1, n+1))
+    cal_cnt = 0
+
+    for num in input_list:
+        while True:
+            if num == q[0]:
+                q.popleft()
+                break
+
+            idx = q.index(num)
+            if idx <= len(q) // 2:
+                q.append(q.popleft())
+                cal_cnt += 1
+            else:
+                q.appendleft(q.pop())
+                cal_cnt += 1
+
+    return cal_cnt
+
+n, m = map(int, sys.stdin.readline().split())
+num_list = list(map(int, sys.stdin.readline().split()))
+
+result = solution_Q1021(n, num_list)
+
+
+# -----------------------------------------------------------------------------------------------
+# Q 1927. 최소 힙 / Q 11279. 최대 힙 (최소 힙에 -) / Q 11286. 절댓값 힙 (튜플을 이용)
+
+import sys
+import heapq
+
+n = int(input())
+q = []
+input_num_list = [int(input()) for _ in range(n)]
+
+for num in input_num_list:
+    if num == 0:
+        if len(q) == 0:
+            print(0)
+        else:
+            pop_num = heapq.heappop(q)
+            # _, pop_num = heapq.heappop(q)
+            print(pop_num)
+            
+    else:
+        heapq.heappush(q, num)
+        # heapq.heappush(q, (abs(num), num))
+
+
